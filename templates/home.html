@@ -1,32 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Home</title>
     <style>
-        .bottom-right {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            text-align: right;
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            background: url("{{ url_for('static', filename='uploads/img2.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
         }
-        .login-form {
-            margin-bottom: 80px;
+
+        .profile-container {
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            gap: 30px;
+        }
+
+        .profile-image {
+            max-width: 180px;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #fff;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 18px;
+            line-height: 1.8;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #6c63ff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: #5751d4;
         }
     </style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post" class="login-form">
-        Username: <input type="text" name="username" required><br>
-        Password: <input type="password" name="password" required><br>
-        <input type="submit" value="Login">
-    </form>
-    {% if error %}
-    <p style="color:red;">{{ error }}</p>
-    {% endif %}
-    <div class="bottom-right">
-        <a href="{{ url_for('register') }}"><button type="button">Register</button></a>
-        <button type="submit" form="login-form">Login</button>
+    <div class="profile-container">
+        <img class="profile-image" src="{{ url_for('static', filename='uploads/' + user.image) }}" alt="Profile Picture">
+        <div class="profile-info">
+            <div><strong>Name:</strong> {{ user.name }}</div>
+            <div><strong>Age:</strong> {{ user.age }}</div>
+            <div><strong>Address:</strong> {{ user.address }}</div>
+            <form action="{{ url_for('logout') }}" method="get">
+                <button class="logout-btn">Logout</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

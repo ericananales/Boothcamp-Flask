@@ -10,10 +10,8 @@
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
-            /* Background image with pinkish theme */
             background: url("{{ url_for('static', filename='uploads/images.jpg') }}") no-repeat center center fixed;
             background-size: cover;
-            /* Optional overlay for softer look */
             position: relative;
         }
         body::before {
@@ -25,7 +23,7 @@
         }
 
         form {
-            background: #ffe4eccc; /* semi-transparent to show bg */
+            background: #ffe4eccc; /* semi-transparent */
             padding: 15px 20px;
             border-radius: 8px;
             width: 260px;
@@ -46,6 +44,7 @@
 
         input[type="text"],
         input[type="password"],
+        input[type="number"],
         input[type="file"] {
             width: 100%;
             padding: 6px 8px;
@@ -74,18 +73,29 @@
         button:hover {
             background-color: #a8234f;
         }
+
+        .message {
+            color: #d6336c;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data">
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
         <label>Image:</label>
-        <input type="file" name="image" required>
+        <input type="file" name="image" accept="image/*" required>
 
         <label>Name:</label>
         <input type="text" name="name" required>
 
         <label>Age:</label>
-        <input type="text" name="age" required>
+        <input type="number" name="age" min="1" required>
 
         <label>Address:</label>
         <input type="text" name="address" required>

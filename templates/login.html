@@ -86,6 +86,11 @@
             font-weight: 600;
             text-align: center;
         }
+
+        .buttons {
+            margin-top: 15px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -97,8 +102,11 @@
         <input type="text" name="username" required><br><br>
         <label>Password:</label><br>
         <input type="password" name="password" required><br><br>
-        <button type="submit" name="login">Login</button>
-        <button type="submit" name="register">Register</button>
+
+        <div class="buttons">
+            <button type="submit" name="login">Login</button>
+            <button type="submit" name="register">Register</button>
+        </div>
     </form>
 </body>
 </html>
